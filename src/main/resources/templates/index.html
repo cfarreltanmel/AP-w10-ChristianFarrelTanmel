@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Student Profile | Christian Farrel Tanmel</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/PageDesign.css}" />
+</head>
+<body th:class="${state.darkMode} ? 'dark-mode' : ''">
+    <div class="header">
+        <h1 class="header-title">Student Profile Card</h1>
+    </div>
+    <div class="profile-card">
+        <img th:src="@{/profileImage/bruh.jpg}" alt="Student Profile Picture" class="profile-pic" />
+        <h1 class="student-name" th:text="${student.fullName}">Christian Farrel Tanmel</h1>
+        <p class="student-title" th:text="${student.title}">Information and Multimedia Technology student</p>
+        <table class="info-table">
+            <tr>
+                <th>Age</th>
+                <td th:text="${student.age}">Age placeholder.</td>
+            </tr>
+            <tr>
+                <th>Hobbies</th>
+                <td th:text="${student.hobbies}">Hobbies placeholder.</td>
+            </tr>
+            <tr>
+                <th>Favorite Quote</th>
+                <td th:text="${student.favoriteQuote}">Favorite quote placeholder.</td>
+            </tr>
+        </table>
+        <div class="control-panel">
+            <form th:action="@{/toggle-dark-mode}" method="post">
+                <button type="submit" class="btn btn-secondary"
+                    th:text="${state.darkMode} ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+                </button>
+            </form>
+            <form th:action="@{/toggle-personality}" method="post">
+                <button type="submit" class="btn btn-primary"
+                    th:text="${state.showPersonality} ? 'Hide Personality' : 'Show Personality'">
+                </button>
+            </form>
+        </div>
+        <p class="student-bio" th:text="${student.bioParagraph}">
+            Bio paragraph placeholder.
+        </p>
+        <div class="personality-section" th:classappend="${state.showPersonality} ? 'show' : ''">
+            <h3 class="personality-title">Personality Insights</h3>
+            <p class="personality-text" th:text="${student.personalityText}">
+                Personality insights placeholder.
+            </p>
+        </div>
+        <div class="social-links">
+            <h4>Connect with me:</h4>
+                <ul>
+                    <li th:each="link : ${student.socialLinks}">
+                        <a th:href="${link}" target="_blank" th:text="${link}">Social Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
